@@ -39,9 +39,6 @@ class ShowTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        let h = self.frame.size.height
-        show.rowheight = Double(h)
     }
     
     required init?(coder aDecoder: NSCoder) {

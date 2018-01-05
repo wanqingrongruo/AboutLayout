@@ -9,6 +9,11 @@
 import UIKit
 import YogaKit
 
+struct Method {
+    let name: String
+    let description: String
+}
+
 class ViewController: UIViewController {
     
     private let paddingHorizontal: YGValue = 8.0
@@ -31,6 +36,7 @@ class ViewController: UIViewController {
     // Show selected
     private let showSelectedIndex = 2
     private let selectedShowSeriesLabel = "S3:E3"
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +84,9 @@ class ViewController: UIViewController {
         summaryView.configureLayout { (layout) in
             layout.isEnabled = true
             layout.flexDirection = .row
+//            layout.flexDirection = .rowReverse
+//            layout.flexDirection = .column
+//            layout.flexDirection = .columnReverse
             layout.padding = self.padding
         }
         let summaryPopularityLabel = UILabel(frame: .zero)
@@ -94,7 +103,12 @@ class ViewController: UIViewController {
             layout.isEnabled = true
             layout.flexGrow = 2.0
             layout.flexDirection = .row
+//            layout.justifyContent = .flexStart
+//            layout.justifyContent = .flexEnd
+//            layout.justifyContent = .center
             layout.justifyContent = .spaceBetween
+           // layout.justifyContent = .spaceAround
+            
         }
         for text in [showYear, showRating, showLength] {
             let summaryInfoLabel = UILabel(frame: .zero)
@@ -160,6 +174,14 @@ class ViewController: UIViewController {
         let castText = "Cast: \(showCast)";
         let castLabel = showLabelFor(text: castText,
                                      font: UIFont.boldSystemFont(ofSize: 14.0))
+        castLabel.numberOfLines = 0
+        castLabel.configureLayout { (layout) in
+            layout.isEnabled = true
+            //layout.flexWrap = .noWrap
+            layout.flexWrap = .wrap
+           // layout.flexWrap = .wrapReverse
+        }
+       
         descriptionView.addSubview(castLabel)
         
         let creatorText = "Creators: \(showCreators)"
@@ -206,6 +228,8 @@ class ViewController: UIViewController {
         showsTableView.backgroundColor = backgroundColor
         showsTableView.register(ShowTableViewCell.self,
                                 forCellReuseIdentifier: showCellIdentifier)
+      
+        
         showsTableView.configureLayout{ (layout) in
             layout.isEnabled = true
             layout.flexGrow = 1.0
@@ -260,7 +284,19 @@ private extension ViewController {
         let actionView = UIView(frame: .zero)
         actionView.configureLayout { (layout) in
             layout.isEnabled = true
+           /* typedef YG_ENUM_BEGIN(YGAlign) {
+                YGAlignAuto,
+                YGAlignFlexStart,
+                YGAlignCenter,
+                YGAlignFlexEnd,
+                YGAlignStretch,
+                YGAlignBaseline,
+                YGAlignSpaceBetween,
+                YGAlignSpaceAround,
+            } YG_ENUM_END(YGAlign);
+           */
             layout.alignItems = .center
+            
             layout.marginRight = 20.0
         }
         let actionButton = UIButton(type: .custom)
@@ -315,13 +351,14 @@ extension ViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print(String(describing: #function))
-        return 1
+        return shows.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ShowTableViewCell =
             tableView.dequeueReusableCell(withIdentifier: showCellIdentifier, for: indexPath) as! ShowTableViewCell
         cell.show = shows[indexPath.row]
+
         print(String(describing: #function))
         return cell
     }
@@ -360,7 +397,7 @@ extension ViewController: UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         print(String(describing: #function))
-        return 100 //CGFloat(shows[indexPath.row].rowheight)
+        return 100// CGFloat(shows[indexPath.row].rowheight)
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         print(String(describing: #function))
