@@ -4,7 +4,7 @@ Swift4 布局方式学习
 
 
 ## UIStackView 
-####学习资料:
+#### 学习资料:
 * [UIStackView教程](https://www.jianshu.com/p/ebdf7d447c8b)
 * [iOS8 中的 Size Class](https://blog.callmewhy.com/2014/09/12/learn-ios8-size-class/)
 
@@ -19,7 +19,7 @@ Flex Container 的所有元素称为 Flex Item
 ![FlexBox](http://p1o0sbmit.bkt.clouddn.com/FlexBox.png)
 
 ##### Flex Container 的 属性
-####### Flex Direction
+###### Flex Direction
 FlexBox 有一个主轴 main axis 和 侧轴 cross axis. 侧轴垂直于主轴.
 可水平可垂直
 主轴默认为 row(水平), 侧轴默认为 column
